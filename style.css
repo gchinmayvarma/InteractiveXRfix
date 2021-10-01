@@ -11,7 +11,7 @@ model-viewer#reveal {
 }
 model-viewer#veal {
     --poster-color: transparent;
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 0px;
 }
