@@ -7,7 +7,7 @@ canvas {
   display: block;
 }
 model-viewer#reveal {
-    --poster-color: transparent;
+    --poster-color: rgb(30,32,40);
 }
 a:link {
   color: rgb(140,150,200);
