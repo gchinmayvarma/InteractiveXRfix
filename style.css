@@ -6,7 +6,7 @@ html, body {
 canvas {
   display: block;
 }
-model-viewer#reveal {
+model-viewer {
     --poster-color: rgb(30,32,40);
 }
 a:link {
