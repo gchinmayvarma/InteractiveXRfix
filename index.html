@@ -14,15 +14,78 @@
 <!--   <model-viewer id="reveal" src="models/untitled7.glb" style="width:100%;height:560px;" ar ar-scale="auto" resizable auto-rotate autoplay magic-leap camera-controls alt="Biceps Brachii XR Model" ios-src="models/untitled7___1632257950899.usdz" re></model-viewer> -->
 <!--   <model-viewer id="naveal" src="models/Armana.glb" style="width:100%;height:500px;" auto-rotate autoplay magic-leap camera-controls alt="Lp 3D model"></model-viewer>   -->
   <model-viewer id="reveal" src="models/scene.glb" style="width:100%;height:560px;" ar ar-scale="auto" resizable auto-rotate autoplay magic-leap camera-controls alt="Biceps Brachii XR Model" ios-src="models/untitled7___1632257950899.usdz" re></model-viewer>
- 
-    <!--     <script>
-  document.querySelector("#reveal").addEventListener('ar-status', (event) => {
-    if(event.detail.status === 'session-started'){
-       document.querySelector("#reveal").setAttribute('src', "models/untitled7.gib") ;
-      });
-    }
-  });
-</script> -->
+
+    <script type="module">
+
+			import * as THREE from 'three.module.js';
+
+			import { OrbitControls } from 'OrbitControls.js';
+			import { GLTFLoader } from 'GLTFLoader.js';
+			import { RGBELoader } from 'RGBELoader.js';
+			import { RoughnessMipmapper } from 'RoughnessMipmapper.js';
+
+			let camera, scene, renderer;
+
+			init();
+			render();
+
+			function init() {
+
+				const container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
+				camera.position.set( - 1.8, 0.6, 2.7 );
+
+				scene = new THREE.Scene();
+
+				new RGBELoader()
+					.setPath( 'models/' )
+					.load( 'royal_esplanade_1k.hdr', function ( texture ) {
+						texture.mapping = THREE.EquirectangularReflectionMapping;
+						scene.background = texture;
+						scene.environment = texture;
+						render();
+						// model
+						// use of RoughnessMipmapper is optional
+						const roughnessMipmapper = new RoughnessMipmapper( renderer );
+						const loader = new GLTFLoader().setPath( 'models/' );
+						loader.load( 'g1.glb', function ( gltf ) {
+							gltf.scene.traverse( function ( child ) {
+								if ( child.isMesh ) {
+									roughnessMipmapper.generateMipmaps( child.material );
+								}
+							} );
+							scene.add( gltf.scene );
+							roughnessMipmapper.dispose();
+							render();
+						} );
+					} );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 2;
+				controls.maxDistance = 10;
+				controls.target.set( 0, 0, - 0.2 );
+				controls.update();
+				window.addEventListener( 'resize', onWindowResize );
+			}
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				render();
+			}
+			function render() { renderer.render( scene, camera );}
+		</script>
     <div><p style="color:rgb(255,255,255);background-color: rgb(30,32,40);position: fixed;left: 10px;top: 480px;">The XR button is only visible for devices<br>which are <a href="https://developers.google.com/ar/discover/supported-devices">ARCore supported</a>.           <br>                              </p>
     </div>
     </body>
