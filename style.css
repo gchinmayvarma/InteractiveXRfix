@@ -7,13 +7,15 @@ canvas {
   display: block;
 }
 model-viewer#reveal {
-    --poster-color: transparent;
+   --poster-color: rgb(30,32,40);
+  background-color: rgb(30,32,40);
   position: fixed;
   left: 0px;
   top: 0px;
 }
-model-viewer#veal {
-    --poster-color: transparent;
+model-viewer#naveal {
+    --poster-color: rgb(30,32,40);
+  background-color: rgb(30,32,40);
   position: fixed;
   left: 0px;
   top: 0px;
