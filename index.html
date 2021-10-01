@@ -10,13 +10,13 @@
 <script nomodule
   src="https://unpkg.com/@google/model-viewer@0.10.0/dist/model-viewer-legacy.js"></script>
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <model-viewer id="reveal" src="models/g1.glb" style="width:100%;height:500px;" ar ar-scale="auto" resizable auto-rotate autoplay magic-leap camera-controls alt="A 3D model" ios-src="models/untitled7___1632257950899.usdz" re></model-viewer>
+  <model-viewer id="reveal" src="models/Armana.glb" style="width:100%;height:500px;" ar ar-scale="auto" resizable auto-rotate autoplay magic-leap camera-controls alt="A 3D model" ios-src="models/untitled7___1632257950899.usdz" re></model-viewer>
   <br>
   <center><p style="color:rgb(255,255,255)">AR button is only visible on <a href="https://developers.google.com/ar/discover/supported-devices">ARCore supported devices</a>.</p>
     <script>
   document.querySelector("#reveal").addEventListener('ar-status', (event) => {
     if(event.detail.status === 'session-started'){
-       document.querySelector("#reveal").setAttribute('src', "models/Armana.gib") ;
+       document.querySelector("#reveal").setAttribute('src', "models/untitled7.gib") ;
       });
     }
   });
