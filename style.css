@@ -6,3 +6,12 @@ html, body {
 canvas {
   display: block;
 }
+model-viewer#reveal {
+    --poster-color: transparent;
+}
+a:link {
+  color: rgb(140,150,200);
+}
+a:visited {
+  color: rgb(140,150,200);
+}
