@@ -6,7 +6,7 @@ html, body {
 div { 
   background-color: rgb(30,32,40);
 position: fixed;
-  left: 0px;
+  left: 10px;
   top: 500px;
 }
 canvas {
