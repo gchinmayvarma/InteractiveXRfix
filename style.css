@@ -3,12 +3,6 @@ html, body {
   padding: 0;
   background-color: rgb(30,32,40);
 }
-div { 
-  background-color: rgb(30,32,40);
-position: fixed;
-  left: 10px;
-  top: 500px;
-}
 canvas {
   display: block;
 }
